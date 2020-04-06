@@ -107,8 +107,49 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function articleOMatic(artDataObj) {
+  const articleDiv = document.createElement('div');
+  articleDiv.classList.add("article");
+
+  const title = document.createElement('h2');
+  title.textContent = artDataObj[0].title;
+
+  const date = document.createElement('p');
+  date.classList.add("date");
+  date.textContent = artDataObj[0].date;
+
+  const firstPTAg = document.createElement('p');
+  date.textContent = artDataObj[0].firstParagraph;
+
+  const secondPTag = document.createElement('p');
+  date.textContent = artDataObj[0].secondParagraph;
+
+  const thirdPTag = document.createElement('p');
+  date.textContent = artDataObj[0].thirdParagraph;
+
+  const expandButton = document.createElement('span');
+  expandButton.classList.add("expandButton");
+  /* expandButton.addEventListener('toggle', (event) => {
+
+  }); */
+
+  articleDiv.appendChild(title);
+  articleDiv.appendChild(date);
+  articleDiv.appendChild(firstPTag);
+  articleDiv.appendChild(secondPTag);
+  articleDiv.appendChild(thirdPTag);
+  articleDiv.appendChild(expandButton);
+
+  return articleDiv;
+}
+
+let articleOutput = data.map((arrItem) => {
+  let article = articleOMatic(arrItem);
+  return article;
+})
