@@ -113,31 +113,44 @@ const data = [
 
 */
 
-function articleOMatic(artDataObj) {
+const articleOMatic = (title, date) => {
+  const article = document.createElement('div');
+  article.textContent = `${title} ${date}`;
+
+  return article;
+}
+
+const returnedArticle = articleOMatic('test title', 'test date');
+
+const articles = document.querySelector('.articles');
+
+articles.appendChild(returnedArticle);
+
+/* function articleOMatic(articleDataObj) {
   const articleDiv = document.createElement('div');
   articleDiv.classList.add("article");
 
   const title = document.createElement('h2');
-  title.textContent = artDataObj[0].title;
+  title.textContent = articleDataObj.title;
 
   const date = document.createElement('p');
   date.classList.add("date");
-  date.textContent = artDataObj[0].date;
+  date.textContent = articleDataObj.date;
 
   const firstPTAg = document.createElement('p');
-  date.textContent = artDataObj[0].firstParagraph;
+  firstPTag.textContent = articleDataObj.firstParagraph;
 
   const secondPTag = document.createElement('p');
-  date.textContent = artDataObj[0].secondParagraph;
+  secondPTag.textContent = articleDataObj.secondParagraph;
 
   const thirdPTag = document.createElement('p');
-  date.textContent = artDataObj[0].thirdParagraph;
+  thirdPTag.textContent = articleDataObj.thirdParagraph;
 
   const expandButton = document.createElement('span');
   expandButton.classList.add("expandButton");
-  /* expandButton.addEventListener('toggle', (event) => {
-
-  }); */
+  expandButton.addEventListener('mouseover', (event) => {
+    articleDiv.classList.add("article-open");
+  }); 
 
   articleDiv.appendChild(title);
   articleDiv.appendChild(date);
@@ -149,7 +162,11 @@ function articleOMatic(artDataObj) {
   return articleDiv;
 }
 
-let articleOutput = data.map((arrItem) => {
-  let article = articleOMatic(arrItem);
+let articleOutput = data.map((articleDataObject) => {
+  let article = articleOMatic(articleDataObject);
   return article;
-})
+});
+
+let displayer = document.querySelector(".articles");
+
+displayer.appendChild(articleOutput); */
