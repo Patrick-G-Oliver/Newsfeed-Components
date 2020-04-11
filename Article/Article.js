@@ -86,6 +86,20 @@ const data = [
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
+  {
+    title: 'Feline Husbandry for the Neophyte',
+    date: 'Dec 7th, 1941',
+    firstParagraph: 'Lorem',
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -111,62 +125,57 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
+  <div class="article">
+    <h2>{title of the article}</h2>
+    <p class="date">{date of the article}</p>
+
+    {three separate paragraph elements}
+
+    <span class='expandButton'></span>
+  </div>
 */
 
-const articleOMatic = (title, date) => {
-  const article = document.createElement('div');
-  article.textContent = `${title} ${date}`;
-
-  return article;
-}
-
-const returnedArticle = articleOMatic('test title', 'test date');
-
-const articles = document.querySelector('.articles');
-
-articles.appendChild(returnedArticle);
-
-/* function articleOMatic(articleDataObj) {
+function articleMaker(title, date, p1, p2, p3) {
+  // Elements
   const articleDiv = document.createElement('div');
-  articleDiv.classList.add("article");
-
-  const title = document.createElement('h2');
-  title.textContent = articleDataObj.title;
-
-  const date = document.createElement('p');
-  date.classList.add("date");
-  date.textContent = articleDataObj.date;
-
-  const firstPTAg = document.createElement('p');
-  firstPTag.textContent = articleDataObj.firstParagraph;
-
+  const titulo = document.createElement('h2');
+  const fecha = document.createElement('p');
+  const firstPTag = document.createElement('p');
   const secondPTag = document.createElement('p');
-  secondPTag.textContent = articleDataObj.secondParagraph;
-
   const thirdPTag = document.createElement('p');
-  thirdPTag.textContent = articleDataObj.thirdParagraph;
-
   const expandButton = document.createElement('span');
-  expandButton.classList.add("expandButton");
-  expandButton.addEventListener('mouseover', (event) => {
-    articleDiv.classList.add("article-open");
-  }); 
 
-  articleDiv.appendChild(title);
-  articleDiv.appendChild(date);
+  // Structure
+  articleDiv.appendChild(titulo);
+  articleDiv.appendChild(fecha);
   articleDiv.appendChild(firstPTag);
   articleDiv.appendChild(secondPTag);
   articleDiv.appendChild(thirdPTag);
   articleDiv.appendChild(expandButton);
 
+  // Classes
+  articleDiv.classList.add("article");
+  fecha.classList.add("date");
+  expandButton.classList.add("expandButton");
+
+  // Content
+  titulo.textContent = title;
+  fecha.textContent = date;
+  firstPTag.textContent = p1;
+  secondPTag.textContent = p2;
+  thirdPTag.textContent = p3;
+  expandButton.textContent = 'Please click here to open article.'
+
+  // expandButton evetn listener
+  expandButton.addEventListener('click', (event) => {
+    articleDiv.classList.toggle('article-open');
+  });
+
   return articleDiv;
-}
+};
 
-let articleOutput = data.map((articleDataObject) => {
-  let article = articleOMatic(articleDataObject);
-  return article;
+const articles = document.querySelector('.articles');
+
+data.forEach(arrObj => {
+  articles.appendChild(articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph));
 });
-
-let displayer = document.querySelector(".articles");
-
-displayer.appendChild(articleOutput); */
