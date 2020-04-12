@@ -121,6 +121,7 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
 
+// Step 1: Create a function that creates a component.
 function articleMaker(title, date, p1, p2, p3) {
   // Elements
   const articleDiv = document.createElement('div');
@@ -152,16 +153,27 @@ function articleMaker(title, date, p1, p2, p3) {
   thirdPTag.textContent = p3;
   expandButton.textContent = 'Please click here to open article.'
 
+  //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
   // expandButton event listener
   expandButton.addEventListener('click', (event) => {
     articleDiv.classList.toggle('article-open');
   });
 
+  //Step 3: return the entire component.
   return articleDiv;
 };
 
+//Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 const articles = document.querySelector('.articles');
 
-data.forEach(arrObj => {
-  articles.appendChild(articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph));
+data.map(arrObj => {
+  const articleOutput = articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph);
+  
+  articles.appendChild(articleOutput);
 });
+
+// or with .forEach()...
+
+// data.forEach(arrObj => {
+//   articles.appendChild(articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph));
+// });
