@@ -119,15 +119,6 @@ const data = [
   Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
-
-    {three separate paragraph elements}
-
-    <span class='expandButton'></span>
-  </div>
 */
 
 function articleMaker(title, date, p1, p2, p3) {
@@ -161,7 +152,7 @@ function articleMaker(title, date, p1, p2, p3) {
   thirdPTag.textContent = p3;
   expandButton.textContent = 'Please click here to open article.'
 
-  // expandButton evetn listener
+  // expandButton event listener
   expandButton.addEventListener('click', (event) => {
     articleDiv.classList.toggle('article-open');
   });
