@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Profitable Propagation of Capsicum annuum \'Jalapeño\'',
+    date: 'Dec 7th, 1941',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+
+    secondParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+
+    thirdParagraph: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`
   }
 ];
 
@@ -107,8 +116,64 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
-
 */
+
+// Step 1: Create a function that creates a component.
+function articleMaker(title, date, p1, p2, p3) {
+  // Elements
+  const articleDiv = document.createElement('div');
+  const titulo = document.createElement('h2');
+  const fecha = document.createElement('p');
+  const firstPTag = document.createElement('p');
+  const secondPTag = document.createElement('p');
+  const thirdPTag = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  // Structure
+  articleDiv.appendChild(titulo);
+  articleDiv.appendChild(fecha);
+  articleDiv.appendChild(firstPTag);
+  articleDiv.appendChild(secondPTag);
+  articleDiv.appendChild(thirdPTag);
+  articleDiv.appendChild(expandButton);
+
+  // Classes
+  articleDiv.classList.add("article");
+  fecha.classList.add("date");
+  expandButton.classList.add("expandButton");
+
+  // Content
+  titulo.textContent = title;
+  fecha.textContent = date;
+  firstPTag.textContent = p1;
+  secondPTag.textContent = p2;
+  thirdPTag.textContent = p3;
+  expandButton.textContent = 'Please click here to open article.'
+
+  //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  // expandButton event listener
+  expandButton.addEventListener('click', (event) => {
+    articleDiv.classList.toggle('article-open');
+  });
+
+  //Step 3: return the entire component.
+  return articleDiv;
+};
+
+//Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
+const articles = document.querySelector('.articles');
+
+data.map(arrObj => {
+  const articleOutput = articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph);
+  
+  articles.appendChild(articleOutput);
+});
+
+// or with .forEach()...
+
+// data.forEach(arrObj => {
+//   articles.appendChild(articleMaker(arrObj.title, arrObj.date, arrObj.firstParagraph, arrObj.secondParagraph, arrObj.thirdParagraph));
+// });
